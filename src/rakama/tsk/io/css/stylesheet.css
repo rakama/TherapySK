@@ -1,0 +1,56 @@
+body
+{
+	font-family: "Arial", sans-serif;
+	font-size: 13;
+	color: #000000;
+}
+
+.timestamp
+{
+	white-space: nowrap;
+	text-decoration: none;
+	font-style: normal;
+	color: #000000;
+}
+
+.echo
+{
+	font-style: normal;
+	background-color: #CCFFCC;
+	color: #000000;
+}
+
+.error
+{ 
+	font-style: italic;
+	background-color: #FFCCBB;
+	color: #991100;
+}
+
+.event
+{
+	font-style: normal;
+	background-color: #DDFFDD;
+	color: #002200;
+}
+
+.verbose
+{
+	font-style: normal;
+	background-color: #E5E5FF;
+	color: #000000;
+}
+
+.undo
+{
+	text-decoration: line-through;
+	background-color: #FFFFFF;
+	color: #CC5555;
+}
+
+.discarded
+{
+	text-decoration: line-through;
+	background-color: #FFFFFF;
+	color: #AAAAAA;
+}
