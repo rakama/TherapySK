@@ -28,58 +28,58 @@ import rakama.tsk.list.SKList;
 
 public class RankAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public RankAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		if(names.length == 0)
-		{
-			console.error("unable to rank (no names provided).");
-			return;		
-		}
-		
-		SKList list = manager.copyList();		
-		
-		StringBuilder output = new StringBuilder();
-		SortedMap<Integer, String> map = new TreeMap<Integer, String>();
-		
-		for(String name : names)
-		{
-			// skip empty names
-			if(name.length()<=0)
-				continue;
+    public RankAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
 
-			int rank = list.getIndex(name);
-			if(rank > -1)
-				map.put(list.getIndex(name), name.toLowerCase());
-			else
-				console.error(playerNotFound(name));	
-		}
-		
-		for(Integer i : map.keySet())
-		{
-			String name = map.get(i);
-			String rank = Console.bold(i.intValue() + 1 + " ");
-			output.append(rank + StringUtil.applyTitleCase(name) + "<br>");
-		}
-		
-		if(!map.isEmpty())
-		{
-			DeleteEntryLink delete = new DeleteEntryLink();
-			String text = "<u># Name</u><br>" + output.toString();
-			delete.setEntry(console.verbose(text, delete));
-		}
-	}
-	
-	private String playerNotFound(String name)
-	{
-		return "cannot rank '" + StringUtil.applyTitleCase(name) + "' (name not found).";
-	}
+    public void execute(String[] names)
+    {
+        if(names.length == 0)
+        {
+            console.error("unable to rank (no names provided).");
+            return;
+        }
+
+        SKList list = manager.copyList();
+
+        StringBuilder output = new StringBuilder();
+        SortedMap<Integer, String> map = new TreeMap<Integer, String>();
+
+        for(String name : names)
+        {
+            // skip empty names
+            if(name.length() <= 0)
+                continue;
+
+            int rank = list.getIndex(name);
+            if(rank > -1)
+                map.put(list.getIndex(name), name.toLowerCase());
+            else
+                console.error(playerNotFound(name));
+        }
+
+        for(Integer i : map.keySet())
+        {
+            String name = map.get(i);
+            String rank = Console.bold(i.intValue() + 1 + " ");
+            output.append(rank + StringUtil.applyTitleCase(name) + "<br>");
+        }
+
+        if(!map.isEmpty())
+        {
+            DeleteEntryLink delete = new DeleteEntryLink();
+            String text = "<u># Name</u><br>" + output.toString();
+            delete.setEntry(console.verbose(text, delete));
+        }
+    }
+
+    private String playerNotFound(String name)
+    {
+        return "cannot rank '" + StringUtil.applyTitleCase(name) + "' (name not found).";
+    }
 }

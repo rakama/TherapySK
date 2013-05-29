@@ -25,33 +25,33 @@ import rakama.tsk.list.SKList;
 
 public class ListAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public ListAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		SKList list = manager.copyList();		
-		
-		StringBuilder output = new StringBuilder();
-		
-		for(int i=0; i<list.size(); i++)
-		{
-			String name = list.get(i).getName();
-			String rank = Console.bold(i + 1 + " ");
-			output.append(rank + StringUtil.applyTitleCase(name) + "<br>");
-		}
-		
-		if(!list.isEmpty())
-		{
-			DeleteEntryLink delete = new DeleteEntryLink();
-			String text = "<u># Name</u><br>" + output.toString();
-			delete.setEntry(console.verbose(text, delete));
-		}
-	}
+    public ListAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
+
+    public void execute(String[] names)
+    {
+        SKList list = manager.copyList();
+
+        StringBuilder output = new StringBuilder();
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            String name = list.get(i).getName();
+            String rank = Console.bold(i + 1 + " ");
+            output.append(rank + StringUtil.applyTitleCase(name) + "<br>");
+        }
+
+        if(!list.isEmpty())
+        {
+            DeleteEntryLink delete = new DeleteEntryLink();
+            String text = "<u># Name</u><br>" + output.toString();
+            delete.setEntry(console.verbose(text, delete));
+        }
+    }
 }

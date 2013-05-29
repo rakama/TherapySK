@@ -18,70 +18,70 @@ package rakama.tsk.list;
 
 public class Player
 {
-	private String name;
-	private boolean present;
-	private int bids;
-	
-	public Player(String name)
-	{
-		this.name = name;
-	}
+    private String name;
+    private boolean present;
+    private int bids;
 
-	public Player(String name, int bids)
-	{
-		this.name = name;
-		this.bids = bids;
-	}
-	
-	public Player(String name, int bids, boolean present)
-	{
-		this.name = name;
-		this.bids = bids;
-		this.present = present;
-	}
-	
-	public String getName()
-	{
-		return name;
-	}
-	
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-		
-	public int getBids()
-	{
-		return bids;
-	}
+    public Player(String name)
+    {
+        this.name = name;
+    }
 
-	public void setBids(int bids)
-	{
-		this.bids = bids;
-	}
-	
-	public void incrementBids()
-	{
-		bids++;
-	}
+    public Player(String name, int bids)
+    {
+        this.name = name;
+        this.bids = bids;
+    }
 
-	public boolean isPresent()
-	{
-		return present;
-	}
-	
-	public void setPresent(boolean a)
-	{
-		present = a;
-	}
-	
-	public String toString()
-	{
-		return name;
-	}
-	
-	public Player clone()
-	{
-		return new Player(name, bids, present);
-	}
+    public Player(String name, int bids, boolean present)
+    {
+        this.name = name;
+        this.bids = bids;
+        this.present = present;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public int getBids()
+    {
+        return bids;
+    }
+
+    public void setBids(int bids)
+    {
+        this.bids = bids;
+    }
+
+    public void incrementBids()
+    {
+        bids++;
+    }
+
+    public boolean isPresent()
+    {
+        return present;
+    }
+
+    public void setPresent(boolean a)
+    {
+        present = a;
+    }
+
+    public String toString()
+    {
+        return name;
+    }
+
+    public Player clone()
+    {
+        return new Player(name, bids, present);
+    }
 }

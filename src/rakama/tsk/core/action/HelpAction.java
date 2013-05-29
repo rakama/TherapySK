@@ -20,60 +20,58 @@ import rakama.tsk.console.Action;
 import rakama.tsk.console.Console;
 import rakama.tsk.console.link.DeleteEntryLink;
 
-
 public class HelpAction implements Action
 {
-	public String helptext = "";
-	
-	Console console;
-	
-	public HelpAction(Console console)
-	{
-		this.console = console;
-		initENG();
-	}
-	
-	private void initENG()
-	{
-		StringBuilder text = new StringBuilder();
+    public String helptext = "";
 
-		text.append("<table><tr><td align=right>");	
+    Console console;
 
-		text.append("<u>Description</u> &nbsp;&nbsp; <br>");
-		text.append("List all players by rank :&nbsp; <br>");	
-		text.append("List specific players by rank :&nbsp; <br>");	
-		text.append("Suicide a player :&nbsp; <br>");
-		text.append("Mark player(s) present :&nbsp; <br>");		
-		text.append("Mark player(s) absent :&nbsp; <br>");		
-		text.append("Re-names a player on the list :&nbsp; <br>");
-		text.append("Insert player(s) into the list :&nbsp; <br>");
-		text.append("Delete player(s) from the list :&nbsp; <br>");
-		text.append("Undo or re-do the last action :&nbsp; <br>");	
-		text.append("Clear the console :&nbsp; <br>");	
-		
-		text.append("</td><td align=left>");
-		
-		text.append("<u>Command</u><br>");
-		text.append("<b>list</b><br>");
-		text.append("<b>rank</b> <i>multiple names</i> <br>");
-		text.append("<b>suicide</b> <i>name</i><br>");
-		text.append("<b>present</b> <i>multiple names</i> <br>");
-		text.append("<b>absent</b> <i>multiple names</i> <br>");
-		text.append("<b>rename</b> <i>oldname newname</i> <br>");
-		text.append("<b>insert</b> <i>multiple names</i> <br>");
-		text.append("<b>delete</b> <i>multiple names</i> <br>");
-		text.append("<b>undo</b> or <b>redo</b><br>");
-		text.append("<b>clear</b><br>");	
+    public HelpAction(Console console)
+    {
+        this.console = console;
+        initENG();
+    }
 
+    private void initENG()
+    {
+        StringBuilder text = new StringBuilder();
 
-		text.append("</td></tr></table>");
-		
-		helptext = text.toString();
-	}
+        text.append("<table><tr><td align=right>");
 
-	public void execute(String[] names) 
-	{	
-		DeleteEntryLink delete = new DeleteEntryLink();
-		delete.setEntry(console.verbose(helptext, delete));
-	}
+        text.append("<u>Description</u> &nbsp;&nbsp; <br>");
+        text.append("List all players by rank :&nbsp; <br>");
+        text.append("List specific players by rank :&nbsp; <br>");
+        text.append("Suicide a player :&nbsp; <br>");
+        text.append("Mark player(s) present :&nbsp; <br>");
+        text.append("Mark player(s) absent :&nbsp; <br>");
+        text.append("Re-names a player on the list :&nbsp; <br>");
+        text.append("Insert player(s) into the list :&nbsp; <br>");
+        text.append("Delete player(s) from the list :&nbsp; <br>");
+        text.append("Undo or re-do the last action :&nbsp; <br>");
+        text.append("Clear the console :&nbsp; <br>");
+
+        text.append("</td><td align=left>");
+
+        text.append("<u>Command</u><br>");
+        text.append("<b>list</b><br>");
+        text.append("<b>rank</b> <i>multiple names</i> <br>");
+        text.append("<b>suicide</b> <i>name</i><br>");
+        text.append("<b>present</b> <i>multiple names</i> <br>");
+        text.append("<b>absent</b> <i>multiple names</i> <br>");
+        text.append("<b>rename</b> <i>oldname newname</i> <br>");
+        text.append("<b>insert</b> <i>multiple names</i> <br>");
+        text.append("<b>delete</b> <i>multiple names</i> <br>");
+        text.append("<b>undo</b> or <b>redo</b><br>");
+        text.append("<b>clear</b><br>");
+
+        text.append("</td></tr></table>");
+
+        helptext = text.toString();
+    }
+
+    public void execute(String[] names)
+    {
+        DeleteEntryLink delete = new DeleteEntryLink();
+        delete.setEntry(console.verbose(helptext, delete));
+    }
 }

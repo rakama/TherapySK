@@ -22,20 +22,20 @@ import rakama.tsk.core.table.ListManager;
 
 public class RedoAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public RedoAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		if(manager.canRedo())
-			manager.redo();
-		else
-			console.scrollToBottom();
-	}
+    public RedoAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
+
+    public void execute(String[] names)
+    {
+        if(manager.canRedo())
+            manager.redo();
+        else
+            console.scrollToBottom();
+    }
 }

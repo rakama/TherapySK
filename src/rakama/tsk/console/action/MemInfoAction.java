@@ -25,34 +25,34 @@ import rakama.tsk.console.link.DeleteEntryLink;
 
 public class MemInfoAction implements Action
 {
-	NumberFormat format = new DecimalFormat(".##");	
-	Console console;
-	
-	public MemInfoAction(Console console)
-	{
-		this.console = console;
-	}
+    NumberFormat format = new DecimalFormat(".##");
+    Console console;
 
-	public void execute(String[] args) 
-	{
-		System.gc();
-		
-	    long totalMem = Runtime.getRuntime().totalMemory();
-	    long freeMem = Runtime.getRuntime().freeMemory();
-	    long usedMem = totalMem - freeMem;
+    public MemInfoAction(Console console)
+    {
+        this.console = console;
+    }
 
-		StringBuilder str = new StringBuilder();
-		
-	    str.append("Memory: " + mb(usedMem) + " MB in use ");
-	    str.append("(" + mb(totalMem) + " MB allocated)<br>");
+    public void execute(String[] args)
+    {
+        System.gc();
 
-		DeleteEntryLink delete = new DeleteEntryLink();
-		delete.setEntry(console.verbose(str.toString(), delete));
-	}
-	
-	private String mb(long b)
-	{	
-		double mb = b * 0.000001;
-		return format.format(mb);
-	}
+        long totalMem = Runtime.getRuntime().totalMemory();
+        long freeMem = Runtime.getRuntime().freeMemory();
+        long usedMem = totalMem - freeMem;
+
+        StringBuilder str = new StringBuilder();
+
+        str.append("Memory: " + mb(usedMem) + " MB in use ");
+        str.append("(" + mb(totalMem) + " MB allocated)<br>");
+
+        DeleteEntryLink delete = new DeleteEntryLink();
+        delete.setEntry(console.verbose(str.toString(), delete));
+    }
+
+    private String mb(long b)
+    {
+        double mb = b * 0.000001;
+        return format.format(mb);
+    }
 }

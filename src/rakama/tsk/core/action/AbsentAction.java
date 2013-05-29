@@ -26,57 +26,57 @@ import rakama.tsk.list.SKList;
 
 public class AbsentAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public AbsentAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		if(names.length == 0)
-		{
-			console.error("unable to mark absent (no names provided).");
-			return;		
-		}
-		
-		SKList list = manager.copyList();		
-		
-		int i = 0;		
-		for(String name : names)
-		{
-			// skip empty names
-			if(name.length()<=0)
-				continue;
-			
-			int rank = list.getIndex(name);	
+    public AbsentAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
 
-			// mark absent if player exists
-			if(rank == -1)
-				console.error(playerNotFound(name));
-			else
-			{
-				Player p = list.get(rank);
-				if(p.isPresent())
-				{
-					p.setPresent(false);
-					i++;
-				}
-			}
-		}		
-		
-		if(i>0)
-		{
-			Entry entry = console.event("Players marked absent (" + i + ").");
-			manager.setList(list, new EventUndoListener(console, entry));	
-		}
-	}
-	
-	private String playerNotFound(String name)
-	{
-		return "cannot mark '" + name + "' absent (name not found).";
-	}
+    public void execute(String[] names)
+    {
+        if(names.length == 0)
+        {
+            console.error("unable to mark absent (no names provided).");
+            return;
+        }
+
+        SKList list = manager.copyList();
+
+        int i = 0;
+        for(String name : names)
+        {
+            // skip empty names
+            if(name.length() <= 0)
+                continue;
+
+            int rank = list.getIndex(name);
+
+            // mark absent if player exists
+            if(rank == -1)
+                console.error(playerNotFound(name));
+            else
+            {
+                Player p = list.get(rank);
+                if(p.isPresent())
+                {
+                    p.setPresent(false);
+                    i++;
+                }
+            }
+        }
+
+        if(i > 0)
+        {
+            Entry entry = console.event("Players marked absent (" + i + ").");
+            manager.setList(list, new EventUndoListener(console, entry));
+        }
+    }
+
+    private String playerNotFound(String name)
+    {
+        return "cannot mark '" + name + "' absent (name not found).";
+    }
 }

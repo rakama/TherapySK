@@ -29,62 +29,62 @@ import rakama.tsk.list.SKList;
 
 public class DefaultListWriter implements ListWriter
 {
-	public static DateFormat date_format = 
-		new SimpleDateFormat("EEEEE, MMMMM d, yyyy hh:mm a z");
-	
-	public void writeList(SKList list, File file) throws IOException
-	{
-		String str = getString(list);
-		FileOutputStream stream = new FileOutputStream(file);
-		OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-16");
-		BufferedWriter out = new BufferedWriter(writer);
-		out.write(str);
-		out.flush();
-		out.close();
-	}
-	
-	public String getString(SKList list)
-	{
-		StringBuilder builder = new StringBuilder();
-		builder.append("#name\r\n");
-		builder.append(list.getTitle());
-		builder.append("\r\n");
-		builder.append("#date\r\n");
-		builder.append(date_format.format(list.getDate()));
-		builder.append("\r\n");
-		builder.append("#list\r\n");
-		
-		int padding = 0;
-		for(Player player : list)
-			padding = Math.max(padding, player.getName().length());		
-		
-		for(Player player : list)
-		{
-			builder.append(getString(player, 0));//padding));
-			builder.append("\r\n");
-		}
-		
-		builder.append("#end\r");
-		return builder.toString();
-	}
-	
-	protected String getString(Player player, int padding)
-	{
-		padding -= player.getName().length();
-		StringBuilder builder = new StringBuilder();
-		builder.append(player.getName());
-		builder.append(space(padding));
-		builder.append(" ");
-		builder.append(player.getBids());
-		builder.append(",");
-		return builder.toString();
-	}
-	
-	protected String space(int padding)
-	{
-		StringBuilder str = new StringBuilder();
-		for(int i=0; i<padding; i++)
-			str.append(" ");
-		return str.toString();
-	}
+    public static DateFormat date_format = new SimpleDateFormat("EEEEE, MMMMM d, yyyy hh:mm a z");
+
+    public void writeList(SKList list, File file) throws IOException
+    {
+        String str = getString(list);
+        FileOutputStream stream = new FileOutputStream(file);
+        OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-16");
+        BufferedWriter out = new BufferedWriter(writer);
+        out.write(str);
+        out.flush();
+        out.close();
+    }
+
+    public String getString(SKList list)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("#name\r\n");
+        builder.append(list.getTitle());
+        builder.append("\r\n");
+        builder.append("#date\r\n");
+        builder.append(date_format.format(list.getDate()));
+        builder.append("\r\n");
+        builder.append("#list\r\n");
+
+        int padding = 0;
+        for(Player player : list)
+            padding = Math.max(padding, player.getName().length());
+
+        for(Player player : list)
+        {
+            builder.append(getString(player, 0));// padding));
+            builder.append("\r\n");
+        }
+
+        builder.append("#end\r");
+        return builder.toString();
+    }
+
+    protected String getString(Player player, int padding)
+    {
+        padding -= player.getName().length();
+        StringBuilder builder = new StringBuilder();
+        builder.append(player.getName());
+        builder.append(space(padding));
+        builder.append(" ");
+        builder.append(player.getBids());
+        builder.append(",");
+        return builder.toString();
+    }
+
+    protected String space(int padding)
+    {
+        StringBuilder str = new StringBuilder();
+        for(int i = 0; i < padding; i++)
+            str.append(" ");
+        
+        return str.toString();
+    }
 }

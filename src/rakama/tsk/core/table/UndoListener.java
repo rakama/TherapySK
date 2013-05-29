@@ -20,5 +20,5 @@ import rakama.tsk.core.table.ListManager.ListEvent;
 
 public interface UndoListener
 {
-	public void listStatusChanged(ListEvent evt);
+    public void listStatusChanged(ListEvent evt);
 }

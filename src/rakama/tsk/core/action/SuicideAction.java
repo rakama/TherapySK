@@ -28,73 +28,73 @@ import rakama.tsk.list.SKList;
 
 public class SuicideAction implements Action
 {
-	Console console;
-	ListManager manager;
+    Console console;
+    ListManager manager;
 
-	Entry entry;
-	
-	public SuicideAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Entry entry;
 
-	public void execute(String[] names) 
-	{	
-		if(names.length == 0)
-		{
-			console.error("unable to suicide (no name provided).");
-			return;		
-		}
-		else if(names.length > 1)
-		{
-			console.error("unable to suicide (expected one argument).");
-			return;
-		}
-	
-		String name = StringUtil.applyTitleCase(names[0]);
-		
-		SKList list = manager.copyList();
-		int old_pos = list.getIndex(name);
-		
-		// player is not in list
-		if(old_pos == -1)
-		{
-			console.error(playerNotFound(name));
-			return;
-		}
-		
-		if(!list.get(old_pos).isPresent() && !confirm(name))
-			return;
-		
-		list.suicide(old_pos);		
-		entry = console.event(playerSuicided(name, old_pos + 1, list.getIndex(name) + 1));
-		manager.setList(list, new EventUndoListener(console, entry));		
-	}
-	
-	private boolean confirm(String names)
-	{
-		String question = "'" + names + "' is not marked present.\n"
-			+ "Suicide this player anyway?";
-		
-		int response = JOptionPane.showConfirmDialog(null, question, "Suicide Player", 
-				JOptionPane.YES_NO_OPTION, 	JOptionPane.WARNING_MESSAGE);
-		
-		return response == JOptionPane.YES_OPTION;
-	}
-	
-	private String playerSuicided(String name, int old_rank, int new_rank)
-	{
-		StringBuilder str = new StringBuilder();
-		str.append("'");
-		str.append(Console.italics(name));
-		str.append("' suicided");
-		str.append(" (moved from rank " + old_rank + " to " + new_rank + ").");
-		return str.toString();
-	}
-	
-	private String playerNotFound(String name)
-	{
-		return "cannot suicide '" + name + "' (name not found).";
-	}
+    public SuicideAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
+
+    public void execute(String[] names)
+    {
+        if(names.length == 0)
+        {
+            console.error("unable to suicide (no name provided).");
+            return;
+        }
+        else if(names.length > 1)
+        {
+            console.error("unable to suicide (expected one argument).");
+            return;
+        }
+
+        String name = StringUtil.applyTitleCase(names[0]);
+
+        SKList list = manager.copyList();
+        int old_pos = list.getIndex(name);
+
+        // player is not in list
+        if(old_pos == -1)
+        {
+            console.error(playerNotFound(name));
+            return;
+        }
+
+        if(!list.get(old_pos).isPresent() && !confirm(name))
+            return;
+
+        list.suicide(old_pos);
+        entry = console.event(playerSuicided(name, old_pos + 1, list.getIndex(name) + 1));
+        manager.setList(list, new EventUndoListener(console, entry));
+    }
+
+    private boolean confirm(String names)
+    {
+        String question = "'" + names + "' is not marked present.\n"
+                + "Suicide this player anyway?";
+
+        int response = JOptionPane.showConfirmDialog(null, question, "Suicide Player",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        return response == JOptionPane.YES_OPTION;
+    }
+
+    private String playerSuicided(String name, int old_rank, int new_rank)
+    {
+        StringBuilder str = new StringBuilder();
+        str.append("'");
+        str.append(Console.italics(name));
+        str.append("' suicided");
+        str.append(" (moved from rank " + old_rank + " to " + new_rank + ").");
+        return str.toString();
+    }
+
+    private String playerNotFound(String name)
+    {
+        return "cannot suicide '" + name + "' (name not found).";
+    }
 }

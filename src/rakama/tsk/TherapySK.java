@@ -31,72 +31,70 @@ import rakama.tsk.io.FileLoader;
 
 @SuppressWarnings("serial")
 public class TherapySK extends JFrame
-{	
-	public static List<Image> icon_images = fetchIconImages();
-	
-	Editor panel;
-	
-	public static void main(String[] args)
-	{		
-		TherapySK tsk = new TherapySK();
-		tsk.setSize(800, 600);
-		tsk.setLocationRelativeTo(null);
-		tsk.setVisible(true);
-	}
-	
-	public TherapySK()
-	{
-		super("Therapy SK");
-		load();
-	}
-	
-	private void load()
-	{
-		try
-		{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}
-		catch(Exception e)
-		{
-			System.err.println(e);
-		}
+{
+    public static List<Image> icon_images = fetchIconImages();
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
-		setIconImages(icon_images);
-		
-		panel = new Editor(this);		
-		getContentPane().add(panel);
-		setJMenuBar(panel.getMenu());
-		
-		String welcome_message = "Welcome to Therapy SK";
-		String help_message = "type <b>help</b> for a list of console commands.";
-		Entry welcome = panel.getConsole().verbose(welcome_message + " - " + help_message);
-		welcome.addLink(new DeleteEntryLink(welcome));
-		
-//		panel.getConsole().echo(TherapySK.class.getResource("TherapySK.class").toString());
-		
-		pack();
-	}
+    Editor panel;
 
-	protected void processWindowEvent(WindowEvent e) 
-	{
-        if (e.getID() == WindowEvent.WINDOW_CLOSING)
+    public static void main(String[] args)
+    {
+        TherapySK tsk = new TherapySK();
+        tsk.setSize(800, 600);
+        tsk.setLocationRelativeTo(null);
+        tsk.setVisible(true);
+    }
+
+    public TherapySK()
+    {
+        super("Therapy SK");
+        load();
+    }
+
+    private void load()
+    {
+        try
         {
-        	if(panel.closeFile())
-        		System.exit(0);
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e)
+        {
+            System.err.println(e);
+        }
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImages(icon_images);
+
+        panel = new Editor(this);
+        getContentPane().add(panel);
+        setJMenuBar(panel.getMenu());
+
+        String welcome_message = "Welcome to Therapy SK";
+        String help_message = "type <b>help</b> for a list of console commands.";
+        Entry welcome = panel.getConsole().verbose(welcome_message + " - " + help_message);
+        welcome.addLink(new DeleteEntryLink(welcome));
+
+        pack();
+    }
+
+    protected void processWindowEvent(WindowEvent e)
+    {
+        if(e.getID() == WindowEvent.WINDOW_CLOSING)
+        {
+            if(panel.closeFile())
+                System.exit(0);
         }
         else
             super.processWindowEvent(e);
-	}
-	
-	private static List<Image> fetchIconImages()
-	{
-		List<Image> icons = new ArrayList<Image>();
-		FileLoader loader = FileLoader.getDefaultFileLoader();
-		icons.add(loader.getImage("icons/sk_white_huge.png"));
-		icons.add(loader.getImage("icons/sk_white_large.png"));
-		icons.add(loader.getImage("icons/sk_white_med.png"));
-		icons.add(loader.getImage("icons/sk_white_small.png"));	
-		return icons;
-	}
+    }
+
+    private static List<Image> fetchIconImages()
+    {
+        List<Image> icons = new ArrayList<Image>();
+        FileLoader loader = FileLoader.getDefaultFileLoader();
+        icons.add(loader.getImage("icons/sk_white_huge.png"));
+        icons.add(loader.getImage("icons/sk_white_large.png"));
+        icons.add(loader.getImage("icons/sk_white_med.png"));
+        icons.add(loader.getImage("icons/sk_white_small.png"));
+        return icons;
+    }
 }

@@ -29,7 +29,7 @@ public class SKList extends ArrayList<Player> implements List<Player>
 	public SKList(String title)
 	{
 		this.title = title;
-		this.date = new Date();
+        this.date = new Date();
 	}
 	
 	public SKList(String title, Date date)
@@ -104,6 +104,7 @@ public class SKList extends ArrayList<Player> implements List<Player>
 		for(Player player : this)
 			if(player.isPresent())
 				return true;
+		
 		return false;
 	}
 	
@@ -126,6 +127,7 @@ public class SKList extends ArrayList<Player> implements List<Player>
 		{
 			if(p.getName().equalsIgnoreCase(player))
 				return i;
+			
 			i++;
 		}
 		
@@ -137,6 +139,7 @@ public class SKList extends ArrayList<Player> implements List<Player>
 		SKList clone = new SKList(title, date);
 		for(Player p : this)
 			clone.add(p.clone());
+		
 		return clone;
 	}
 }

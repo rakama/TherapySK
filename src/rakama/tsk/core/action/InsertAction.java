@@ -26,66 +26,66 @@ import rakama.tsk.list.SKList;
 
 public class InsertAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public InsertAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		if(names.length == 0)
-		{
-			console.error("unable to insert (no name provided).");
-			return;		
-		}
-		
-		SKList list = manager.copyList();		
-			
-		for(String n : names)
-		{
-			// skip empty names
-			if(n.length()<=0)
-				continue;
-			
-			// check if name is alphanumeric
-			if(!StringUtil.isAlphaNumeric(n))
-			{
-				console.error(invalidName(n));
-				continue;
-			}
+    public InsertAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
 
-			// apply proper capitalization
-			String name = StringUtil.applyTitleCase(n);
-			
-			// insert name only if it is unique
-			if(!list.hasPlayer(name))
-			{
-				list.insert(name);
-				Entry entry = console.event(playerInserted(name, list.getIndex(name) + 1));
-				manager.setList(list, new EventUndoListener(console, entry));
-			}				
-			else
-				console.error(playerFound(name));
-		}			
-		
-	}
-		
-	private String playerInserted(String name, int rank)
-	{
-		return "'" + Console.italics(name) + "' inserted (rank "+ rank + ").";
-	}
-	
-	private String invalidName(String name)
-	{
-		return "cannot insert '" + name + "' (name has invalid characters).";
-	}
-	
-	private String playerFound(String name)
-	{
-		return "cannot insert '" + name + "' (name already exists).";
-	}
+    public void execute(String[] names)
+    {
+        if(names.length == 0)
+        {
+            console.error("unable to insert (no name provided).");
+            return;
+        }
+
+        SKList list = manager.copyList();
+
+        for(String n : names)
+        {
+            // skip empty names
+            if(n.length() <= 0)
+                continue;
+
+            // check if name is alphanumeric
+            if(!StringUtil.isAlphaNumeric(n))
+            {
+                console.error(invalidName(n));
+                continue;
+            }
+
+            // apply proper capitalization
+            String name = StringUtil.applyTitleCase(n);
+
+            // insert name only if it is unique
+            if(!list.hasPlayer(name))
+            {
+                list.insert(name);
+                Entry entry = console.event(playerInserted(name, list.getIndex(name) + 1));
+                manager.setList(list, new EventUndoListener(console, entry));
+            }
+            else
+                console.error(playerFound(name));
+        }
+
+    }
+
+    private String playerInserted(String name, int rank)
+    {
+        return "'" + Console.italics(name) + "' inserted (rank " + rank + ").";
+    }
+
+    private String invalidName(String name)
+    {
+        return "cannot insert '" + name + "' (name has invalid characters).";
+    }
+
+    private String playerFound(String name)
+    {
+        return "cannot insert '" + name + "' (name already exists).";
+    }
 }

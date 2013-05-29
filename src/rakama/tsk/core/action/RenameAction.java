@@ -26,101 +26,101 @@ import rakama.tsk.list.SKList;
 
 public class RenameAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public RenameAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] args) 
-	{	
-		if(args.length == 0)
-		{
-			console.error("unable to rename (name must be provided).");
-			return;		
-		}
-		else if(args.length == 1)
-		{
-			console.error("unable to rename (a new name must be provided).");
-			return;		
-		}
-		else if(args.length > 2)
-		{
-			console.error("unable to rename (expected two arguments).");
-			return;
-		}
+    public RenameAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
 
-		String old_name = StringUtil.applyTitleCase(args[0]);
-		String new_name = StringUtil.applyTitleCase(args[1]);
+    public void execute(String[] args)
+    {
+        if(args.length == 0)
+        {
+            console.error("unable to rename (name must be provided).");
+            return;
+        }
+        else if(args.length == 1)
+        {
+            console.error("unable to rename (a new name must be provided).");
+            return;
+        }
+        else if(args.length > 2)
+        {
+            console.error("unable to rename (expected two arguments).");
+            return;
+        }
 
-		if(old_name.equals(new_name))
-			return;
-		
-		SKList list = manager.copyList();
-		int rank = list.getIndex(old_name);
-		
-		// player is not in list
-		if(rank == -1)
-		{
-			console.error(playerNotFound(old_name));
-			return;
-		}
-		
-		// check if name is non-null and alphanumeric
-		if(!isValidName(new_name))
-		{
-			console.error(invalidName(old_name, new_name));
-			return;
-		}
-		
-		// player already exists
-		if(list.hasPlayer(new_name))
-		{
-			console.error(playerFound(old_name, new_name));
-			return;
-		}
-		
-		list.get(rank).setName(new_name);		
-		Entry entry = console.event(playerRenamed(old_name, new_name));
-		manager.setList(list, new EventUndoListener(console, entry));
-	}
+        String old_name = StringUtil.applyTitleCase(args[0]);
+        String new_name = StringUtil.applyTitleCase(args[1]);
 
-	private boolean isValidName(String name)
-	{
-		if(name.length()==0)
-			return false;
-		
-		if(StringUtil.isAlphaNumeric(name))
-			return true;
-		
-		return false;
-	}
-	
-	private String playerRenamed(String old_name, String new_name)
-	{
-		StringBuilder str = new StringBuilder();
-		str.append("Player '");
-		str.append(Console.italics(old_name));
-		str.append("' renamed to '" + Console.italics(new_name));
-		str.append("'.");
-		return str.toString();
-	}
-	
-	private String playerNotFound(String old_name)
-	{
-		return "cannot rename '" + old_name + "' (name not found).";
-	}
+        if(old_name.equals(new_name))
+            return;
 
-	private String invalidName(String old_name, String name)
-	{
-		return "unable to rename '" + old_name + "' ('" + name + "' has invalid characters).";
-	}
-	
-	private String playerFound(String old_name, String name)
-	{
-		return "unable to rename '" + old_name + "' ('" + name + "' already exists).";
-	}
+        SKList list = manager.copyList();
+        int rank = list.getIndex(old_name);
+
+        // player is not in list
+        if(rank == -1)
+        {
+            console.error(playerNotFound(old_name));
+            return;
+        }
+
+        // check if name is non-null and alphanumeric
+        if(!isValidName(new_name))
+        {
+            console.error(invalidName(old_name, new_name));
+            return;
+        }
+
+        // player already exists
+        if(list.hasPlayer(new_name))
+        {
+            console.error(playerFound(old_name, new_name));
+            return;
+        }
+
+        list.get(rank).setName(new_name);
+        Entry entry = console.event(playerRenamed(old_name, new_name));
+        manager.setList(list, new EventUndoListener(console, entry));
+    }
+
+    private boolean isValidName(String name)
+    {
+        if(name.length() == 0)
+            return false;
+
+        if(StringUtil.isAlphaNumeric(name))
+            return true;
+
+        return false;
+    }
+
+    private String playerRenamed(String old_name, String new_name)
+    {
+        StringBuilder str = new StringBuilder();
+        str.append("Player '");
+        str.append(Console.italics(old_name));
+        str.append("' renamed to '" + Console.italics(new_name));
+        str.append("'.");
+        return str.toString();
+    }
+
+    private String playerNotFound(String old_name)
+    {
+        return "cannot rename '" + old_name + "' (name not found).";
+    }
+
+    private String invalidName(String old_name, String name)
+    {
+        return "unable to rename '" + old_name + "' ('" + name + "' has invalid characters).";
+    }
+
+    private String playerFound(String old_name, String name)
+    {
+        return "unable to rename '" + old_name + "' ('" + name + "' already exists).";
+    }
 }

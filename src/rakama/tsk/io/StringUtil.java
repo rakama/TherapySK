@@ -18,38 +18,38 @@ package rakama.tsk.io;
 
 public class StringUtil
 {
-	public static boolean isAlphaNumeric(String str)
-	{
-		char[] characters = str.toCharArray();
-		
-		for(char c : characters)
-			if(!Character.isLetterOrDigit(c))
-				return false;
-		
-		return true;
-	}
-	
-	public static boolean isAlphaNumeric(String str, boolean allowSpaces)
-	{
-		char[] characters = str.toCharArray();
-		
-		for(char c : characters)
-			if(!Character.isLetterOrDigit(c)&&!(allowSpaces&&Character.isSpaceChar(c)))
-				return false;
-		
-		return true;
-	}
-	
-	public static String applyTitleCase(String name)
-	{
-		if(name.length()>1)
-		{
-			name = name.toLowerCase();
-			name = Character.toTitleCase(name.charAt(0)) + name.substring(1);
-		}
-		else
-			name = name.toUpperCase();
-		
-		return name;
-	}
+    public static boolean isAlphaNumeric(String str)
+    {
+        char[] characters = str.toCharArray();
+
+        for(char c : characters)
+            if(!Character.isLetterOrDigit(c))
+                return false;
+
+        return true;
+    }
+
+    public static boolean isAlphaNumeric(String str, boolean allowSpaces)
+    {
+        char[] characters = str.toCharArray();
+
+        for(char c : characters)
+            if(!Character.isLetterOrDigit(c) && !(allowSpaces && Character.isSpaceChar(c)))
+                return false;
+
+        return true;
+    }
+
+    public static String applyTitleCase(String name)
+    {
+        if(name.length() > 1)
+        {
+            name = name.toLowerCase();
+            name = Character.toTitleCase(name.charAt(0)) + name.substring(1);
+        }
+        else
+            name = name.toUpperCase();
+
+        return name;
+    }
 }

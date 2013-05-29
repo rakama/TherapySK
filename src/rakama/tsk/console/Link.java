@@ -20,6 +20,6 @@ import javax.swing.text.Element;
 
 public interface Link
 {
-	public void clicked(Element source);	
-	public String getLinkHTML();
+    public void clicked(Element source);
+    public String getLinkHTML();
 }

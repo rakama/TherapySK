@@ -18,5 +18,5 @@ package rakama.tsk.console;
 
 public interface Action
 {
-	public void execute(String[] args);
+    public void execute(String[] args);
 }

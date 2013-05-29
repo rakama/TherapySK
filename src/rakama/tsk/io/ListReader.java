@@ -23,5 +23,5 @@ import rakama.tsk.list.SKList;
 
 public interface ListReader
 {
-	public SKList readList(File file) throws IOException;
+    public SKList readList(File file) throws IOException;
 }

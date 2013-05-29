@@ -22,28 +22,28 @@ import rakama.tsk.console.link.DeleteEntryLink;
 
 public class AboutAction implements Action
 {
-	public String helptext = "";
-	
-	Console console;
-	
-	public AboutAction(Console console)
-	{
-		this.console = console;
-		initENG();
-	}
-	
-	private void initENG()
-	{
-		StringBuilder text = new StringBuilder();
+    public String helptext = "";
 
-		text.append("Therapy SK 1.0");
-		
-		helptext = text.toString();
-	}
+    Console console;
 
-	public void execute(String[] names) 
-	{	
-		DeleteEntryLink delete = new DeleteEntryLink();
-		delete.setEntry(console.verbose(helptext, delete));
-	}
+    public AboutAction(Console console)
+    {
+        this.console = console;
+        initENG();
+    }
+
+    private void initENG()
+    {
+        StringBuilder text = new StringBuilder();
+
+        text.append("Therapy SK 1.0");
+
+        helptext = text.toString();
+    }
+
+    public void execute(String[] names)
+    {
+        DeleteEntryLink delete = new DeleteEntryLink();
+        delete.setEntry(console.verbose(helptext, delete));
+    }
 }

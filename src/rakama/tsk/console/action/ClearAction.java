@@ -21,15 +21,15 @@ import rakama.tsk.console.Console;
 
 public class ClearAction implements Action
 {
-	Console console;
-	
-	public ClearAction(Console console)
-	{
-		this.console = console;
-	}
+    Console console;
 
-	public void execute(String[] args) 
-	{
-		console.clear();
-	}
+    public ClearAction(Console console)
+    {
+        this.console = console;
+    }
+
+    public void execute(String[] args)
+    {
+        console.clear();
+    }
 }

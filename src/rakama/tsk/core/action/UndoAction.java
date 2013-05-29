@@ -22,18 +22,18 @@ import rakama.tsk.core.table.ListManager;
 
 public class UndoAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public UndoAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		if(manager.canUndo())
-			manager.undo();
-	}
+    public UndoAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
+
+    public void execute(String[] names)
+    {
+        if(manager.canUndo())
+            manager.undo();
+    }
 }

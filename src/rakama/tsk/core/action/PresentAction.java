@@ -26,58 +26,58 @@ import rakama.tsk.list.SKList;
 
 public class PresentAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public PresentAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{
-		if(names.length == 0)
-		{
-			console.error("unable to mark present (no names provided).");
-			return;		
-		}
-		
-		SKList list = manager.copyList();		
-		
-		int i = 0;
-		
-		for(String name : names)
-		{
-			// skip empty names
-			if(name.length()<=0)
-				continue;
+    public PresentAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
 
-			int rank = list.getIndex(name);
-			
-			// mark present if player exists
-			if(rank == -1)
-				console.error(playerNotFound(name));
-			else
-			{
-				Player p = list.get(rank);
-				if(!p.isPresent())
-				{
-					p.setPresent(true);
-					i++;
-				}
-			}
-		}		
-		
-		if(i>0)
-		{
-			Entry entry = console.event("Players marked present (" + i + ").");
-			manager.setList(list, new EventUndoListener(console, entry));	
-		}
-	}
-	
-	private String playerNotFound(String name)
-	{
-		return "cannot mark '" + name + "' present (name not found).";
-	}
+    public void execute(String[] names)
+    {
+        if(names.length == 0)
+        {
+            console.error("unable to mark present (no names provided).");
+            return;
+        }
+
+        SKList list = manager.copyList();
+
+        int i = 0;
+
+        for(String name : names)
+        {
+            // skip empty names
+            if(name.length() <= 0)
+                continue;
+
+            int rank = list.getIndex(name);
+
+            // mark present if player exists
+            if(rank == -1)
+                console.error(playerNotFound(name));
+            else
+            {
+                Player p = list.get(rank);
+                if(!p.isPresent())
+                {
+                    p.setPresent(true);
+                    i++;
+                }
+            }
+        }
+
+        if(i > 0)
+        {
+            Entry entry = console.event("Players marked present (" + i + ").");
+            manager.setList(list, new EventUndoListener(console, entry));
+        }
+    }
+
+    private String playerNotFound(String name)
+    {
+        return "cannot mark '" + name + "' present (name not found).";
+    }
 }

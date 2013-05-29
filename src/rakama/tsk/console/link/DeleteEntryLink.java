@@ -20,35 +20,36 @@ import javax.swing.text.Element;
 
 import rakama.tsk.console.Entry;
 import rakama.tsk.console.Link;
-	
+
 public class DeleteEntryLink implements Link
 {
-	public static String close_html = "close";
-	
-	Entry entry;
+    public static String close_html = "close";
 
-	public DeleteEntryLink()
-	{
-		entry = null;
-	}
-	public DeleteEntryLink(Entry e)
-	{
-		entry = e;
-	}
-		
-	public String getLinkHTML() 
-	{
-		return close_html;
-	}
-	
-	public void setEntry(Entry entry)
-	{
-		this.entry = entry;
-	}
+    Entry entry;
 
-	public void clicked(Element source) 
-	{
-		if(entry!=null)
-			entry.getConsole().removeEntry(entry);
-	}		
+    public DeleteEntryLink()
+    {
+        entry = null;
+    }
+
+    public DeleteEntryLink(Entry e)
+    {
+        entry = e;
+    }
+
+    public String getLinkHTML()
+    {
+        return close_html;
+    }
+
+    public void setEntry(Entry entry)
+    {
+        this.entry = entry;
+    }
+
+    public void clicked(Element source)
+    {
+        if(entry != null)
+            entry.getConsole().removeEntry(entry);
+    }
 }

@@ -23,29 +23,29 @@ import javax.swing.ImageIcon;
 
 public class FileLoader
 {
-	public static boolean permit_external_files = true;
-	
-	protected FileLoader()
-	{
-		
-	}
-	
-	public static FileLoader getDefaultFileLoader()
-	{
-		return new FileLoader();
-	}
+    public static boolean permit_external_files = true;
 
-	public URL getURL(String str)
-	{
-		return getClass().getResource(str);
-	}
+    protected FileLoader()
+    {
 
-	public Image getImage(String str)
-	{
-		URL url = getURL(str);
-		if(url == null)
-			return null;
-		ImageIcon icon = new ImageIcon(getURL(str));
-		return icon.getImage();
-	}
+    }
+
+    public static FileLoader getDefaultFileLoader()
+    {
+        return new FileLoader();
+    }
+
+    public URL getURL(String str)
+    {
+        return getClass().getResource(str);
+    }
+
+    public Image getImage(String str)
+    {
+        URL url = getURL(str);
+        if(url == null)
+            return null;
+        ImageIcon icon = new ImageIcon(getURL(str));
+        return icon.getImage();
+    }
 }

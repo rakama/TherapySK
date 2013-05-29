@@ -28,89 +28,88 @@ import rakama.tsk.list.SKList;
 
 public class DeleteAction implements Action
 {
-	Console console;
-	ListManager manager;
-	
-	public DeleteAction(Console console, ListManager manager)
-	{
-		this.console = console;
-		this.manager = manager;
-	}
+    Console console;
+    ListManager manager;
 
-	public void execute(String[] names) 
-	{		
-		SKList list = manager.copyList();
-		
-		// bail on trivial bad input
-		if(names.length == 0)
-		{
-			console.error("unable to delete (no name provided).");
-			return;		
-		}
-		else if(names.length == 1 && !list.hasPlayer(names[0]))
-		{
-			console.error(playerNotFound(StringUtil.applyTitleCase(names[0])));
-			return;
-		}
-		
-		// confirm deletion
-		if(!confirm(names))
-			return;
-		
-		// store old ranks
-		int[] old_ranks = new int[names.length];		
-		for(int i=0; i<names.length; i++)
-			old_ranks[i] = list.getIndex(names[i]);
-				
-		for(int i=0; i<names.length; i++)
-		{
-			// skip empty names
-			if(names[i].length()<=0)
-				continue;
+    public DeleteAction(Console console, ListManager manager)
+    {
+        this.console = console;
+        this.manager = manager;
+    }
 
-			int rank = list.getIndex(names[i]);
-			names[i] = StringUtil.applyTitleCase(names[i]);
-			
-			// delete player if player exists
-			if(rank == -1)
-				console.error(playerNotFound(names[i]));
-			else
-			{
-				list.remove(rank);
-				Entry entry = console.event(playerDeleted(names[i], old_ranks[i] + 1));
-				manager.setList(list, new EventUndoListener(console, entry));			
-			}
-		}
-	}
-	
-	private boolean confirm(String[] names)
-	{
-		int count = 0;
-		for(String name : names)
-			if(name.length()>0)
-				count++;
-		
-		String question;
-		
-		if(names.length == 0)
-			return true;
-		else if(names.length > 1)
-			question = "Remove (" + count + ") players from the current list?";
-		else
-			question = "Remove '" + StringUtil.applyTitleCase(names[0]) 
-				+ "' from the current list?";
-		
-		return JOptionPane.showConfirmDialog(null, question, 
-				"Delete", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
-	}
-	
-	private String playerDeleted(String name, int rank)
-	{	
-		return "'" + Console.italics(name) + "' deleted (rank " + rank + ").";
-	}
-	
-	private String playerNotFound(String name)
-	{
-		return "cannot delete '" + name + "' (name not found).";
-	}
+    public void execute(String[] names)
+    {
+        SKList list = manager.copyList();
+
+        // bail on trivial bad input
+        if(names.length == 0)
+        {
+            console.error("unable to delete (no name provided).");
+            return;
+        }
+        else if(names.length == 1 && !list.hasPlayer(names[0]))
+        {
+            console.error(playerNotFound(StringUtil.applyTitleCase(names[0])));
+            return;
+        }
+
+        // confirm deletion
+        if(!confirm(names))
+            return;
+
+        // store old ranks
+        int[] old_ranks = new int[names.length];
+        for(int i = 0; i < names.length; i++)
+            old_ranks[i] = list.getIndex(names[i]);
+
+        for(int i = 0; i < names.length; i++)
+        {
+            // skip empty names
+            if(names[i].length() <= 0)
+                continue;
+
+            int rank = list.getIndex(names[i]);
+            names[i] = StringUtil.applyTitleCase(names[i]);
+
+            // delete player if player exists
+            if(rank == -1)
+                console.error(playerNotFound(names[i]));
+            else
+            {
+                list.remove(rank);
+                Entry entry = console.event(playerDeleted(names[i], old_ranks[i] + 1));
+                manager.setList(list, new EventUndoListener(console, entry));
+            }
+        }
+    }
+
+    private boolean confirm(String[] names)
+    {
+        int count = 0;
+        for(String name : names)
+            if(name.length() > 0)
+                count++;
+
+        String question;
+
+        if(names.length == 0)
+            return true;
+        else if(names.length > 1)
+            question = "Remove (" + count + ") players from the current list?";
+        else
+            question = "Remove '" + StringUtil.applyTitleCase(names[0])
+                    + "' from the current list?";
+
+        return JOptionPane.showConfirmDialog(null, question, "Delete", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    private String playerDeleted(String name, int rank)
+    {
+        return "'" + Console.italics(name) + "' deleted (rank " + rank + ").";
+    }
+
+    private String playerNotFound(String name)
+    {
+        return "cannot delete '" + name + "' (name not found).";
+    }
 }

@@ -23,28 +23,28 @@ import rakama.tsk.core.table.ListManager.ListEvent;
 
 public class EventUndoListener implements UndoListener
 {
-	Console console;
-	Entry entry;
-	
-	public EventUndoListener(Console console, Entry entry)
-	{
-		this.console = console;
-		this.entry = entry;
-	}
-	
-	public void listStatusChanged(ListEvent e) 
-	{
-		if(e == ListEvent.UNDO)
-		{
-			entry.setStyle("undo");
-			console.scrollToEntry(entry);
-		}
-		else if(e == ListEvent.REDO)
-		{
-			entry.setStyle("event");
-			console.scrollToEntry(entry);
-		}
-		else if(e == ListEvent.DISCARDED)
-			entry.setStyle("discarded");
-	}
+    Console console;
+    Entry entry;
+
+    public EventUndoListener(Console console, Entry entry)
+    {
+        this.console = console;
+        this.entry = entry;
+    }
+
+    public void listStatusChanged(ListEvent e)
+    {
+        if(e == ListEvent.UNDO)
+        {
+            entry.setStyle("undo");
+            console.scrollToEntry(entry);
+        }
+        else if(e == ListEvent.REDO)
+        {
+            entry.setStyle("event");
+            console.scrollToEntry(entry);
+        }
+        else if(e == ListEvent.DISCARDED)
+            entry.setStyle("discarded");
+    }
 }
